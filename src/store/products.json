@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "123iuok",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  },
+  {
+    "id": "2",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "123few",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  },
+  {
+    "id": "3",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "123ffew",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  },
+  {
+    "id": "4",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "12",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  },
+  {
+    "id": "5",
+    "title": "titulo editado 1",
+    "description": "example des",
+    "price": 25,
+    "thumbnails": [],
+    "code": "123dew",
+    "stock": 45,
+    "category": "polo",
+    "status": true
+  },
+  {
+    "id": "6",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "12423",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  },
+  {
+    "id": "7",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [],
+    "code": "124423",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
+  }
+]
