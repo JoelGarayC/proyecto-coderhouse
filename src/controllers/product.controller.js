@@ -42,11 +42,15 @@ export async function addProduct(req, res) {
   const { title, description, code, stock, price, category } = req.body;
   try {
     if (!req.files) throw new Error("No se pudo guardar las imagenes");
-    const routesFiles = req.files.map((file) => {
+    req.files.map((file) => {
       if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
         throw new Error("Solo se permiten archivos de imagen");
       }
-      file.path;
+    });
+
+    let imagenes = [];
+    req.files.map((file) => {
+      imagenes.push(file.path);
     });
 
     const stockNumber = parseInt(stock);
@@ -57,7 +61,7 @@ export async function addProduct(req, res) {
       code,
       stock: stockNumber,
       price: priceNumber,
-      thumbnails: routesFiles,
+      thumbnails: imagenes,
       category,
     };
 

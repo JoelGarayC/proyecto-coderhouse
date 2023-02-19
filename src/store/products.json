@@ -75,5 +75,20 @@
     "stock": 45,
     "category": "camisa",
     "status": true
+  },
+  {
+    "id": "8",
+    "title": "example product",
+    "description": "example ",
+    "price": 2,
+    "thumbnails": [
+      "D:\\JOEL\\CODERHOUSE\\proyecto-coderhouse\\public\\imgs\\descargar (2).jpg",
+      "D:\\JOEL\\CODERHOUSE\\proyecto-coderhouse\\public\\imgs\\descargar (1).jpg",
+      "D:\\JOEL\\CODERHOUSE\\proyecto-coderhouse\\public\\imgs\\camisa.jpg"
+    ],
+    "code": "154lopklmmno",
+    "stock": 45,
+    "category": "camisa",
+    "status": true
   }
 ]
