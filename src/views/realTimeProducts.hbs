@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Formulario - Websockets</title>
-  </head>
-  <body>
-    <h1>Agregar Producto</h1>
-    <form action="/api/products" method="POST" enctype="multipart/form-data">
+<section>
+  <h1>Agregar Producto</h1>
+    <form id="add-item-form" enctype="multipart/form-data">
       <div>
         <label for="title">Titulo</label>
         <input type="text" id="title" name="title" />
@@ -38,7 +29,30 @@
         <label for="thumbnails">Subir Imágenes</label>
         <input type="file" id="thumbnails" name="thumbnails" multiple />
       </div>
-      <button>Agregar Producto</button>
+      <button type="submit">Agregar Producto</button>
     </form>
-  </body>
-</html>
+    <div id="resultado" class="resultado"></div>
+</section>
+
+<section class="list-section">
+  <h1>Lista de Productos con Socket.io </h1>
+  <ul id="list-container">
+  {{#each products}}
+    <li>
+      <h3>{{this.title}}</h3>
+      <p>{{this.description}}</p>
+      <p><strong>Precio:</strong> {{this.price}}</p>
+      <p><strong>Código:</strong> {{this.code}}</p>
+      <p><strong>Stock:</strong> {{this.stock}}</p>
+      <p><strong>Categoría:</strong> {{this.category}}</p>
+      <div>
+        <button class="btn-delete" data-product-id={{this.id}}>Eliminar</button>
+      </div>
+    </li>
+  {{/each}}
+</ul>
+
+  <a href="/">Ver Lista de Productos</a>
+</section>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/public/js/index.js" type="module"></script>

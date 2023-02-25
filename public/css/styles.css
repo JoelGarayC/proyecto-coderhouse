@@ -9,3 +9,6 @@ body {
   color: #ffffff;
   color-scheme: ligth dark;
 }
+.resultado {
+  height: 2rem;
+}

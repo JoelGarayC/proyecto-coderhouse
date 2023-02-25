@@ -1,0 +1,16 @@
+<section>
+  <h1>Lista de Productos </h1>
+  <ul>
+    {{#each products}}
+    <li>
+      <h3>{{this.title}}</h3>
+      <p>{{this.description}}</p>
+      <p><strong>Precio:</strong> {{this.price}}</p>
+      <p><strong>Código:</strong> {{this.code}}</p>
+      <p><strong>Stock:</strong> {{this.stock}}</p>
+      <p><strong>Categoría:</strong> {{this.category}}</p>
+    </li>
+    {{/each}}
+  </ul>
+  <a href="/realtimeproducts">Ver Lista en tiempo real</a>
+</section>
