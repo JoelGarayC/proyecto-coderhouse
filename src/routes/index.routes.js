@@ -16,7 +16,7 @@ router.get("/", async function (req, res) {
   res.render("home", data);
 })
 
-router.get("/realtimeproducts", async function (req, res) {
+router.get("/realtimeproducts", async function (_req, res) {
   try {
     const products = await product.getProducts();
     const data = { products }

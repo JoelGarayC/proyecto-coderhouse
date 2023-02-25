@@ -7,7 +7,7 @@ export function createHbs(app) {
   // Configurar Handlebars como motor de plantillas
   const hbs = exphbs.create({
     extname: '.hbs',
-    defaultLayout: 'main',
+    defaultLayout: 'index',
     handlebars: handlebars,
     layoutsDir: pathBase + '/src/views/layouts',
     partialsDir: pathBase + '/src/views/partials'
