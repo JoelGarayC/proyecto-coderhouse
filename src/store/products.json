@@ -1,1 +1,89 @@
-[{"id":"6","title":"Producto prueba 6","description":"Descripcion del producto","price":56,"thumbnails":[{"name":"vialactea-kUOC--1248x698@abc.jpg","path":"/imgs/vialactea-kUOC--1248x698@abc.jpg"},{"name":"eyes.jpg","path":"/imgs/eyes.jpg"},{"name":"images.jpg","path":"/imgs/images.jpg"}],"code":"35","stock":63,"category":"6543","status":true},{"id":"7","title":"Producto prueba 7","description":"Descripcion del producto","price":45,"thumbnails":[{"name":"eyes.jpg","path":"/imgs/eyes.jpg"},{"name":"images.jpg","path":"/imgs/images.jpg"},{"name":"vialactea-kUOC--1248x698@abc.jpg","path":"/imgs/vialactea-kUOC--1248x698@abc.jpg"}],"code":"her","stock":52,"category":"532","status":true},{"id":"8","title":"Producto prueba 8","description":"Descripcion del producto","price":53,"thumbnails":[{"name":"images.jpg","path":"/imgs/images.jpg"}],"code":"gre543","stock":43,"category":"53","status":true},{"id":"9","title":"Producto prueba ","description":"Descripcion del producto","price":45,"thumbnails":[],"code":"y54y","stock":45,"category":"y54","status":true},{"id":"10","title":"Producto prueba ","description":"Descripcion del producto","price":14,"thumbnails":[],"code":"weqf","stock":143,"category":"fe43224","status":true},{"id":"11","title":"Producto prueba 6","description":"Descripcion del producto","price":53,"thumbnails":[{"name":"producto-sin-imagen.jpg","path":"/imgs/producto-sin-imagen.jpg"},{"name":"eyes.jpg","path":"/imgs/eyes.jpg"},{"name":"images.jpg","path":"/imgs/images.jpg"}],"code":"jjjjjjjjjj","stock":543,"category":"ffewrfre","status":true}]
+[
+  {
+    "id": "6",
+    "title": "Producto prueba 6",
+    "description": "Descripcion del producto",
+    "price": 56,
+    "thumbnails": [
+      {
+        "name": "vialactea-kUOC--1248x698@abc.jpg",
+        "path": "/imgs/vialactea-kUOC--1248x698@abc.jpg"
+      },
+      { "name": "eyes.jpg", "path": "/imgs/eyes.jpg" },
+      { "name": "images.jpg", "path": "/imgs/images.jpg" }
+    ],
+    "code": "35",
+    "stock": 63,
+    "category": "6543",
+    "status": true
+  },
+  {
+    "id": "7",
+    "title": "Producto prueba 7",
+    "description": "Descripcion del producto",
+    "price": 45,
+    "thumbnails": [
+      { "name": "eyes.jpg", "path": "/imgs/eyes.jpg" },
+      { "name": "images.jpg", "path": "/imgs/images.jpg" },
+      {
+        "name": "vialactea-kUOC--1248x698@abc.jpg",
+        "path": "/imgs/vialactea-kUOC--1248x698@abc.jpg"
+      }
+    ],
+    "code": "her",
+    "stock": 52,
+    "category": "532",
+    "status": true
+  },
+  {
+    "id": "8",
+    "title": "Producto prueba 8",
+    "description": "Descripcion del producto",
+    "price": 53,
+    "thumbnails": [{ "name": "images.jpg", "path": "/imgs/images.jpg" }],
+    "code": "gre543",
+    "stock": 43,
+    "category": "53",
+    "status": true
+  },
+  {
+    "id": "9",
+    "title": "Producto prueba ",
+    "description": "Descripcion del producto",
+    "price": 45,
+    "thumbnails": [],
+    "code": "y54y",
+    "stock": 45,
+    "category": "y54",
+    "status": true
+  },
+  {
+    "id": "10",
+    "title": "Producto prueba ",
+    "description": "Descripcion del producto",
+    "price": 14,
+    "thumbnails": [],
+    "code": "weqf",
+    "stock": 143,
+    "category": "fe43224",
+    "status": true
+  },
+  {
+    "id": "11",
+    "title": "Producto prueba 6",
+    "description": "Descripcion del producto",
+    "price": 53,
+    "thumbnails": [
+      {
+        "name": "producto-sin-imagen.jpg",
+        "path": "/imgs/producto-sin-imagen.jpg"
+      },
+      { "name": "eyes.jpg", "path": "/imgs/eyes.jpg" },
+      { "name": "images.jpg", "path": "/imgs/images.jpg" }
+    ],
+    "code": "jjjjjjjjjj",
+    "stock": 543,
+    "category": "ffewrfre",
+    "status": true
+  }
+]

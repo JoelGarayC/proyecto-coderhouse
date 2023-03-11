@@ -1,5 +1,5 @@
 import fs from "fs";
-import { validateFileJson } from "../utils/validations.js";
+import { validateFileJson } from "../../../utils/validations.js";
 import ProductManager from "./ProductManager.js";
 
 class CartManager {

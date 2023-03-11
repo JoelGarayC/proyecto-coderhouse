@@ -1,13 +1,13 @@
 import fs from "fs";
 import path from "path";
-import pathBase from "../utils/pathBase.js";
+import pathBase from "../../../utils/pathBase.js";
 import {
   validateExistCode,
   validateFields,
   validateFileJson,
   validateOther,
   validateType,
-} from "../utils/validations.js";
+} from "../../../utils/validations.js";
 
 const filePath = path.join(`${pathBase}/src/store/products.json`);
 
