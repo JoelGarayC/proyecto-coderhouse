@@ -1,24 +1,26 @@
 const socket = io();
 
 // Escucha el evento "updateList" para actualizar la lista en tiempo real
-const listContainer = document.querySelector('.list-container');
-socket.on('updateList', async (products) => {
-  listContainer.innerHTML = '';
+const listContainer = document.querySelector(".list-container");
+socket.on("updateList", async (products) => {
+  listContainer.innerHTML = "";
 
   if (products?.length === 0) {
-    const p = document.createElement('p');
-    p.innerHTML = "La lista esta vacia"
+    const p = document.createElement("p");
+    p.innerHTML = "La lista esta vacia";
     listContainer.appendChild(p);
-    return
+    return;
   }
 
   products?.forEach((product) => {
-
     const li = document.createElement("li");
 
     li.innerHTML = `
-    <picture>${product.thumbnails.map(thumbnail =>
-      `<img src="${thumbnail.path}" alt="${thumbnail.name}">`).join('')}
+    <picture>${product.thumbnails
+      .map(
+        (thumbnail) => `<img src="${thumbnail.path}" alt="${thumbnail.name}">`
+      )
+      .join("")}
     </picture>
     <div class="list-description">
       <h2>${product.title}</h2>
@@ -29,17 +31,18 @@ socket.on('updateList', async (products) => {
       <p><strong>Categoría:</strong> ${product.category}</p>
     </div>
     <div class="btn">
-        <button class="btn-delete" data-product-id="${product.id}">Eliminar</button>
+        <button class="btn-delete" data-product-id="${
+          product.id
+        }">Eliminar</button>
     </div>
     `;
     listContainer.appendChild(li);
-
   });
 });
 
 // Obtener el formulario y escuchar el evento de submit
-const form = document.querySelector('#add-item-form');
-form.addEventListener('submit', async (e) => {
+const form = document.querySelector("#add-item-form");
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   // Obtener los datos del formulario
@@ -64,7 +67,7 @@ form.addEventListener('submit', async (e) => {
     const images = await Promise.all(imagePromises);
     data.thumbnails = images ?? [];
     // Enviar los datos del formulario y las imágenes procesadas al servidor mediante socket.io
-    socket.emit('submit-form', data);
+    socket.emit("submit-form", data);
     form.reset();
     console.log(data);
   } catch (error) {
@@ -73,22 +76,20 @@ form.addEventListener('submit', async (e) => {
 });
 
 // Escuchar la respuesta del servidor del envio del formulario y muestra la informacion en pantalla
-socket.on('form-response', (res) => {
-  const resultado = document.querySelector('#resultado');
-  const span = resultado.querySelector('#resultado span');
+socket.on("form-response", (res) => {
+  const resultado = document.querySelector("#resultado");
+  const span = resultado.querySelector("#resultado span");
 
   const message = res.message.code || res.message;
   if (span) return;
-  const newSpan = document.createElement('span');
+  const newSpan = document.createElement("span");
   newSpan.innerHTML = message;
   resultado.appendChild(newSpan);
 
   setTimeout(() => {
     resultado.removeChild(newSpan);
   }, 2000);
-
 });
-
 
 // Obtener los elementos del DOM para el modal delete btn
 const modal = document.getElementById("myModal");
@@ -97,26 +98,26 @@ const span = document.getElementsByClassName("close")[0];
 
 span.onclick = function () {
   modal.style.display = "none";
-}
+};
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 
 let idProducto = null;
-listContainer.addEventListener('click', (e) => {
-  if (e.target.classList.contains('btn-delete')) {
+listContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-delete")) {
     modal.style.display = "block";
     const productId = e.target.dataset.productId;
     idProducto = productId;
   }
 });
 
-btnConfirm.addEventListener('click', () => {
-  socket.emit('delete-product', idProducto);
+btnConfirm.addEventListener("click", () => {
+  socket.emit("delete-product", idProducto);
   modal.style.display = "none";
-})
+});
 
 function readAndProcessImage(file) {
   return new Promise((resolve, reject) => {
@@ -127,10 +128,6 @@ function readAndProcessImage(file) {
       const imgObj = { name: file.name, data: reader.result };
       resolve(imgObj);
     };
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
-
-
-
-

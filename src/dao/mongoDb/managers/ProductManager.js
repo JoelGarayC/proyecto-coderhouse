@@ -8,10 +8,11 @@ import { Product } from "../models/Product.js";
 const { ObjectId } = mongoose.Types;
 
 class ProductManager {
-  constructor() {}
-
-  async getProducts() {
+  async getProducts(limit) {
     try {
+      if (limit) {
+        return await Product.find().limit(limit).lean();
+      }
       const data = await Product.find();
       if (!data) return [];
       return data;
@@ -118,7 +119,7 @@ class ProductManager {
       validateType(newProduct);
       validateOther(newProduct);
 
-      //validacion del nombre de producto, exluye el titulo del producto ingresado
+      //validacion del nombre de producto, exluye el producto ingresado
       const productTitle = await Product.findOne({
         _id: { $ne: id },
         title: newProduct.title,
@@ -126,7 +127,7 @@ class ProductManager {
       if (productTitle)
         throw new Error("El título del producto ya existe, escribe otro!");
 
-      //validacion del code de producto, excluye el producto del id ingresado
+      //validacion del code de producto, excluye el producto ingresado
       const productCode = await Product.findOne({
         _id: { $ne: id },
         code: newProduct.code,

@@ -22,7 +22,7 @@ export function validateType(product) {
 
   for (const field of validateFieldsNumber) {
     if (typeof product[field] !== "number")
-      throw new Error(`El campo "${field}" deber ser de tipo number`);
+      throw new Error(`El campo "${field}" deber ser de tipo numérico`);
   }
 
   for (const field of validateFieldsString) {

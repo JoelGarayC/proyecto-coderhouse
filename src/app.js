@@ -1,26 +1,18 @@
 import express from "express";
-import { createHbs, validateMIME } from "./config.js";
 import { connectDB } from "./database/connectDB.js";
 import routes from "./routes/index.routes.js";
+import viewsRoutes from "./routes/views.routes.js";
 
 class App {
   constructor() {
     this.app = express();
     this.connectDataBase();
-    this.config();
     this.midlewares();
     this.routes();
   }
 
   connectDataBase() {
     connectDB();
-  }
-
-  config() {
-    // Configuracion Handlebars como motor de plantillas
-    createHbs(this.app);
-    // Configuracion para aceptar js y css en public
-    validateMIME(this.app);
   }
 
   midlewares() {
@@ -30,6 +22,7 @@ class App {
   }
 
   routes() {
+    this.app.use("/", viewsRoutes);
     this.app.use("/api/v1", routes);
   }
 }

@@ -8,19 +8,24 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    lowercase: true,
     index: true,
   },
   description: { type: String, required: true },
   price: { type: Number, required: true },
   thumbnails: [
     {
+      id: String,
       name: String,
       path: String,
     },
   ],
 
-  code: { type: String, required: true },
+  code: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+  },
   stock: { type: Number, required: true },
   category: {
     type: String,
@@ -29,8 +34,6 @@ const ProductSchema = new Schema({
     index: true,
   },
   status: { type: Boolean, required: true },
-  created: { type: Date, default: Date.now },
-  updated: { type: Date, default: Date.now },
 });
 
 export const Product = model("Product", ProductSchema);

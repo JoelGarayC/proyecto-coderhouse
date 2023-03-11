@@ -3,17 +3,9 @@ import ProductManager from "../managers/ProductManager.js";
 const product = new ProductManager();
 
 export async function getProducts(req, res) {
-  const { limit } = req.query;
+  const limit = parseInt(req.query.limit);
   try {
-    const products = await product.getProducts();
-    if (limit) {
-      const limitProducts = products.slice(0, limit);
-      res.json({
-        ok: true,
-        products: limitProducts,
-      });
-      return;
-    }
+    const products = await product.getProducts(limit);
     res.json({
       ok: true,
       products: products,
@@ -41,14 +33,12 @@ export async function addProduct(req, res) {
   try {
     let imagenes = [];
 
-    const stockNumber = parseInt(stock);
-    const priceNumber = parseInt(price);
     const newProduct = {
       title,
       description,
       code,
-      stock: stockNumber,
-      price: priceNumber,
+      stock,
+      price,
       thumbnails: imagenes,
       category,
     };
@@ -56,7 +46,7 @@ export async function addProduct(req, res) {
     const response = await product.addProduct(newProduct);
     res.json({
       ok: true,
-      res: response,
+      message: response,
     });
   } catch (err) {
     res.json({ error: err.message });
@@ -69,20 +59,21 @@ export async function updateProductById(req, res) {
   try {
     let imagenes = [];
 
-    const stockNumber = parseInt(stock);
-    const priceNumber = parseInt(price);
     const updateProduct = {
       title,
       description,
       code,
-      stock: stockNumber,
-      price: priceNumber,
+      stock,
+      price,
       thumbnails: imagenes,
       category,
     };
 
     const response = await product.updateProduct(pid, updateProduct);
-    res.json({ ok: true, message: response });
+    res.json({
+      ok: true,
+      message: response,
+    });
   } catch (err) {
     res.json({ error: err.message });
   }

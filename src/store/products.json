@@ -18,24 +18,6 @@
     "status": true
   },
   {
-    "id": "7",
-    "title": "Producto prueba 7",
-    "description": "Descripcion del producto",
-    "price": 45,
-    "thumbnails": [
-      { "name": "eyes.jpg", "path": "/imgs/eyes.jpg" },
-      { "name": "images.jpg", "path": "/imgs/images.jpg" },
-      {
-        "name": "vialactea-kUOC--1248x698@abc.jpg",
-        "path": "/imgs/vialactea-kUOC--1248x698@abc.jpg"
-      }
-    ],
-    "code": "her",
-    "stock": 52,
-    "category": "532",
-    "status": true
-  },
-  {
     "id": "8",
     "title": "Producto prueba 8",
     "description": "Descripcion del producto",
@@ -84,6 +66,17 @@
     "code": "jjjjjjjjjj",
     "stock": 543,
     "category": "ffewrfre",
+    "status": true
+  },
+  {
+    "id": "12",
+    "title": "4234",
+    "description": "234",
+    "price": 324,
+    "thumbnails": [],
+    "code": "4324",
+    "stock": 3242,
+    "category": "3423",
     "status": true
   }
 ]
