@@ -1,29 +1,30 @@
-import express from "express";
-import { withMongoDb } from "../config.js";
+import express from 'express'
+import { withMongoDb } from '../config.js'
 import {
   addCart as addCartFs,
   addProductToCart as addProductToCartFs,
-  getCartById as getCartByIdFs,
-} from "../dao/fileSystem/controllers/cart.controller.js";
+  getCartById as getCartByIdFs
+} from '../dao/fileSystem/controllers/cart.controller.js'
 import {
   addCart,
   addProductToCart,
+  deleteProductToCart,
   getCartById,
-  getCarts,
-} from "../dao/mongoDb/controllers/cart.controller.js";
+  getCarts
+} from '../dao/mongoDb/controllers/cart.controller.js'
 
-const router = express.Router();
+const router = express.Router()
 
 router
-  .route("/")
+  .route('/')
   .get(getCarts)
-  .post(withMongoDb ? addCart : addCartFs);
+  .post(withMongoDb ? addCart : addCartFs)
 
-router.get("/:cid", withMongoDb ? getCartById : getCartByIdFs);
+router.get('/:cid', withMongoDb ? getCartById : getCartByIdFs)
 
-router.post(
-  "/:cid/product/:pid",
-  withMongoDb ? addProductToCart : addProductToCartFs
-);
+router
+  .route('/:cid/product/:pid')
+  .post(withMongoDb ? addProductToCart : addProductToCartFs)
+  .delete(deleteProductToCart)
 
-export default router;
+export default router

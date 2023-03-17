@@ -1,35 +1,42 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 import {
   validateFields,
   validateOther,
-  validateType,
-} from "../../../utils/validations.js";
-import { Product } from "../models/Product.js";
-const { ObjectId } = mongoose.Types;
+  validateType
+} from '../../../utils/validations.js'
+import { Product } from '../models/Product.js'
+const { ObjectId } = mongoose.Types
 
 class ProductManager {
-  async getProducts(limit) {
+  async getProducts({ page = 1, limit = 10, sort, query = '' }) {
     try {
-      if (limit) {
-        return await Product.find().limit(limit).lean();
+      console.log(query)
+      const queryPag = {}
+      const options = {
+        page,
+        limit,
+        sort:
+          sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : {}
       }
-      const data = await Product.find();
-      if (!data) return [];
-      return data;
+
+      const data = await Product.paginate(queryPag, options)
+
+      if (!data) return []
+      return data
     } catch (err) {
-      return err.message;
+      throw new Error(err.message)
     }
   }
 
   async getProductById(id) {
     try {
-      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`);
+      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`)
 
-      const productById = await Product.findById(id);
-      if (!productById) throw new Error(`Producto con ID: ${id} no encontrado`);
-      return productById;
+      const productById = await Product.findById(id)
+      if (!productById) throw new Error(`Producto con ID: ${id} no encontrado`)
+      return productById
     } catch (err) {
-      return err.message;
+      throw new Error(err.message)
     }
   }
 
@@ -41,7 +48,7 @@ class ProductManager {
     code,
     stock,
     category,
-    status = true,
+    status = true
   }) {
     const product = {
       title,
@@ -51,34 +58,34 @@ class ProductManager {
       code,
       stock,
       category,
-      status,
-    };
+      status
+    }
 
     try {
       // validacion de los campos y tipos
-      validateFields(product);
-      validateType(product);
-      validateOther(product);
+      validateFields(product)
+      validateType(product)
+      validateOther(product)
 
       //validacion del nombre de producto
-      const productTitle = await Product.findOne({ title }).lean();
+      const productTitle = await Product.findOne({ title }).lean()
       if (productTitle)
-        throw new Error("El título del producto ya existe, escribe otro!");
+        throw new Error('El título del producto ya existe, escribe otro!')
 
       // validacion si existe el codigo en la lista
-      const productCode = await Product.findOne({ code }).lean();
+      const productCode = await Product.findOne({ code }).lean()
       if (productCode)
         throw new Error(
           `El código "${code}" ya existe en la lista, escribe otro!`
-        );
+        )
 
       // agregacion de producto
-      const newProduct = new Product(product);
-      await newProduct.save();
+      const newProduct = new Product(product)
+      await newProduct.save()
 
-      return "Producto agregado con éxito";
+      return 'Producto agregado con éxito'
     } catch (err) {
-      return err.message;
+      throw new Error(err.message)
     }
   }
 
@@ -92,7 +99,7 @@ class ProductManager {
       code,
       stock,
       category,
-      status = true,
+      status = true
     }
   ) {
     const newProduct = {
@@ -103,61 +110,60 @@ class ProductManager {
       code,
       stock,
       category,
-      status,
-    };
+      status
+    }
 
     try {
-      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`);
+      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`)
 
       //busca el producto por id en la base de datos
-      const res = await Product.findById(id);
-      if (!res)
-        throw new Error(`No se encontró un producto con el ID: "${id}"`);
+      const res = await Product.findById(id)
+      if (!res) throw new Error(`No se encontró un producto con el ID: "${id}"`)
 
       // validacion de los campos y tipos
-      validateFields(newProduct);
-      validateType(newProduct);
-      validateOther(newProduct);
+      validateFields(newProduct)
+      validateType(newProduct)
+      validateOther(newProduct)
 
       //validacion del nombre de producto, exluye el producto ingresado
       const productTitle = await Product.findOne({
         _id: { $ne: id },
-        title: newProduct.title,
-      }).lean();
+        title: newProduct.title
+      }).lean()
       if (productTitle)
-        throw new Error("El título del producto ya existe, escribe otro!");
+        throw new Error('El título del producto ya existe, escribe otro!')
 
       //validacion del code de producto, excluye el producto ingresado
       const productCode = await Product.findOne({
         _id: { $ne: id },
-        code: newProduct.code,
-      }).lean();
+        code: newProduct.code
+      }).lean()
       if (productCode)
-        throw new Error("El código del producto ya existe, escribe otro!");
+        throw new Error('El código del producto ya existe, escribe otro!')
 
       // actualizar el producto
-      await Product.findByIdAndUpdate(id, newProduct);
-      return `Producto con ID: "${id}" actualizado con éxito!`;
-    } catch (error) {
-      return error.message;
+      await Product.findByIdAndUpdate(id, newProduct)
+      return `Producto con ID: "${id}" actualizado con éxito!`
+    } catch (err) {
+      throw new Error(err.message)
     }
   }
 
   async deleteProduct(id) {
     try {
       // validacion del ID
-      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`);
+      if (!ObjectId.isValid(id)) throw new Error(`El ID ${id} no es válido`)
 
       //elimina el producto de la base de datos
-      const isDeletedProd = await Product.findByIdAndDelete(id);
+      const isDeletedProd = await Product.findByIdAndDelete(id)
       if (!isDeletedProd)
-        throw new Error(`No se encontró un producto con el ID "${id}"`);
+        throw new Error(`No se encontró un producto con el ID "${id}"`)
 
-      return `Producto con ID: "${id}" eliminado correctamente`;
-    } catch (error) {
-      return error.message;
+      return `Producto con ID: "${id}" eliminado correctamente`
+    } catch (err) {
+      throw new Error(err.message)
     }
   }
 }
 
-export default ProductManager;
+export default ProductManager
