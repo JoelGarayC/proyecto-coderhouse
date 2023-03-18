@@ -1,15 +1,15 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from 'mongoose'
 
 export const CartSchema = new Schema({
-  id: {
-    type: String,
-  },
   products: [
     {
-      id: String,
-      quantity: Number,
-    },
-  ],
-});
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
+      },
+      quantity: Number
+    }
+  ]
+})
 
-export const Cart = model("Cart", CartSchema);
+export const Cart = model('Cart', CartSchema)

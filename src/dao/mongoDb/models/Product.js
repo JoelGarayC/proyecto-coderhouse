@@ -2,9 +2,6 @@ import { Schema, model } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
 const ProductSchema = new Schema({
-  id: {
-    type: String
-  },
   title: {
     type: String,
     required: true,
@@ -15,7 +12,6 @@ const ProductSchema = new Schema({
   price: { type: Number, required: true },
   thumbnails: [
     {
-      id: String,
       name: String,
       path: String
     }

@@ -10,7 +10,6 @@ const { ObjectId } = mongoose.Types
 class ProductManager {
   async getProducts({ page = 1, limit = 10, sort, query = '' }) {
     try {
-      console.log(query)
       const queryPag = {}
       const options = {
         page,

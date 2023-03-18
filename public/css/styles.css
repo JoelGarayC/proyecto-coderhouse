@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -17,7 +17,7 @@ picture {
   display: flex;
   aspect-ratio: 15/10;
   background-color: #5c5c5c;
-  background-image: url("/imgs/producto-sin-imagen.jpg");
+  background-image: url('/imgs/producto-sin-imagen.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -121,16 +121,23 @@ a {
   display: inline-block;
 }
 
+.list-section a.btn-update {
+  padding: 0;
+}
+
 .list-container {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
 }
 
 .list-container li {
   background-color: #303030;
   border-radius: 0.5rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .list-container li h2 {
@@ -139,6 +146,13 @@ a {
 
 .list-description {
   padding: 1rem;
+}
+
+.list-controls {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
 .btn {
@@ -150,7 +164,16 @@ a {
 .btn button {
   background-color: #af511b;
 }
+.btn button.btn-update {
+  background-color: #2a7f94;
+}
 
+.product-details {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* MODAL */
 .modal {
   display: none;
   position: fixed;

@@ -9,8 +9,11 @@ import {
   addCart,
   addProductToCart,
   deleteProductToCart,
+  deleteProductsToCart,
   getCartById,
-  getCarts
+  getCarts,
+  updateProductToCart,
+  updateProductsToCart
 } from '../dao/mongoDb/controllers/cart.controller.js'
 
 const router = express.Router()
@@ -20,11 +23,17 @@ router
   .get(getCarts)
   .post(withMongoDb ? addCart : addCartFs)
 
-router.get('/:cid', withMongoDb ? getCartById : getCartByIdFs)
+router
+  .route('/:cid')
+  .get(withMongoDb ? getCartById : getCartByIdFs)
+  .put(updateProductsToCart)
+  .delete(deleteProductsToCart)
+//put
 
 router
-  .route('/:cid/product/:pid')
+  .route('/:cid/products/:pid')
   .post(withMongoDb ? addProductToCart : addProductToCartFs)
+  .put(updateProductToCart)
   .delete(deleteProductToCart)
 
 export default router

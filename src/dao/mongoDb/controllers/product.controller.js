@@ -21,10 +21,10 @@ export async function getProducts(req, res) {
       }&limit=${resp.limit}&sort=${sort ? sort : ''}`
     }
 
-    res.json({
+    const products = {
       status: 'success',
       payload: resp.docs,
-      totalPages: Math.round(resp.totalDocs / resp.limit),
+      totalPages: Math.ceil(resp.totalDocs / resp.limit),
       prevPage: resp.prevPage,
       nextPage: resp.nextPage,
       page: resp.page,
@@ -32,7 +32,9 @@ export async function getProducts(req, res) {
       hasNextPage: resp.hasNextPage,
       prevLink: resp.hasPrevPage === false ? null : links.prev,
       nextLink: resp.hasNextPage === false ? null : links.next
-    })
+    }
+
+    res.json(products)
   } catch (err) {
     res.json({ status: 'error', message: err.message })
   }

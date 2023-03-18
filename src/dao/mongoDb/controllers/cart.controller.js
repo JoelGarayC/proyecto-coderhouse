@@ -23,7 +23,7 @@ export async function getCartById(req, res) {
       cart: response
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.json({ status: 'error', message: err.message })
   }
 }
 
@@ -35,7 +35,7 @@ export async function addCart(req, res) {
       message: response
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.json({ status: 'error', message: err.message })
   }
 }
 
@@ -48,7 +48,35 @@ export async function addProductToCart(req, res) {
       message: response
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.json({ status: 'error', message: err.message })
+  }
+}
+
+export async function updateProductToCart(req, res) {
+  const { cid, pid } = req.params
+  const { quantity } = req.body
+  try {
+    const response = await cart.updateProduct(cid, pid, quantity)
+    res.json({
+      ok: true,
+      message: response
+    })
+  } catch (err) {
+    res.json({ status: 'error', message: err.message })
+  }
+}
+
+export async function updateProductsToCart(req, res) {
+  const { cid } = req.params
+
+  try {
+    const response = await cart.updateProducts(cid)
+    res.json({
+      ok: true,
+      message: response
+    })
+  } catch (err) {
+    res.json({ status: 'error', message: err.message })
   }
 }
 
@@ -61,6 +89,19 @@ export async function deleteProductToCart(req, res) {
       message: response
     })
   } catch (err) {
-    res.json({ error: err.message })
+    res.json({ status: 'error', message: err.message })
+  }
+}
+
+export async function deleteProductsToCart(req, res) {
+  const { cid } = req.params
+  try {
+    const response = await cart.deleteProducts(cid)
+    res.json({
+      ok: true,
+      message: response
+    })
+  } catch (err) {
+    res.json({ status: 'error', message: err.message })
   }
 }
