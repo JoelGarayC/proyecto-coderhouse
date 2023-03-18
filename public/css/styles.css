@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #242424;
+  color: #ececec;
+  color-scheme: ligth dark;
+}
+
+picture {
+  display: flex;
+  aspect-ratio: 15/10;
+  background-color: #5c5c5c;
+  background-image: url('/imgs/producto-sin-imagen.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+picture img {
+  display: block;
+  max-width: 100%;
+  aspect-ratio: 15/10;
+  object-fit: cover;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  font-size: inherit;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input {
+  padding: 0.4rem 0.8rem;
+  background-color: #303030;
+  border: 0.1rem solid #5c5c5c;
+  border-radius: 0.3rem;
+  font-size: inherit;
+}
+
+a {
+  color: #70e7f0;
+}
+
+.form-section {
+  min-height: 31rem;
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-section h1 {
+  padding-bottom: 0.8rem;
+}
+
+.form-section form {
+  width: 100%;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section form div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-section form button {
+  background-color: #1c8f97;
+}
+
+.resultado {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: rgb(63, 63, 63);
+}
+
+.resultado span {
+  background-color: rgb(235, 213, 23);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+  text-align: center;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.list-section {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 1rem;
+}
+
+.list-section h1 {
+  padding-bottom: 0.8rem;
+}
+
+.list-section a {
+  padding-top: 1rem;
+  display: inline-block;
+}
+
+.list-section a.btn-update {
+  padding: 0;
+}
+
+.list-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+}
+
+.list-container li {
+  background-color: #303030;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list-container li h2 {
+  font-size: 1.2em;
+}
+
+.list-description {
+  padding: 1rem;
+}
+
+.list-controls {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0 1rem 1rem 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn button {
+  background-color: #af511b;
+}
+.btn button.btn-update {
+  background-color: #2a7f94;
+}
+
+.product-details {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #303030;
+  margin: 20% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 0.5rem;
+  width: 30rem;
+}
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-footer button {
+  background-color: #af511b;
+}
+
+.close {
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* CHAT */
+
+.chat-section {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.chat-section ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chat-section li {
+  width: fit-content;
+  border-radius: 0.5rem;
+  list-style: none;
+  padding: 0.5rem;
+  background-color: #dce3e4;
+  color: rgb(39, 39, 39);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.chat-section li span {
+  font-size: 0.8rem;
+}
+
+.chat-section li.mensaje-propio {
+  align-self: end;
+  background-color: #99e0e5;
+  color: rgb(39, 39, 39);
+  justify-content: end;
+}

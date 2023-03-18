@@ -1,0 +1,86 @@
+<section class="chat-section">
+
+  <h1> Chat con Mongodb + SocketIO</h1>
+
+  <form id="form-message">
+    <input type="email" name="email" id="email" placeholder="Escribe tu email" value="">
+    <input type="text" name="message" id="message" placeholder="Escribe tu mensaje">
+    <button type="submit">Enviar</button>
+  </form>
+
+  <ul id="messages">
+    {{#each messages}}
+    <li>
+      <span>{{this.user}}</span>
+      <p>{{this.message}}</p>
+    </li>
+  {{/each}}
+  </ul>
+
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  const us = sessionStorage.getItem('usuario');
+  if (us) {
+    const campoInput = document.getElementById('email');
+    campoInput.value = us;
+  }
+
+  
+  console.log("Connect ");
+
+  const fm = document.getElementById("form-message");
+
+  fm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.getElementsByName('email')[0]?.value;
+    const message = document.getElementsByName('message')[0]?.value;
+
+    if (email && message) {
+    
+      sessionStorage.setItem('usuario', email);
+    
+      const msg = {
+        user: email,
+        message
+      }
+
+      socket.emit('chat',msg);
+    }
+  });
+
+
+
+
+const listContainer = document.querySelector("#messages");
+  
+  socket.on('update-chat', function(data) {
+    listContainer.innerHTML = "";
+
+    console.log(data);
+    
+    data?.forEach((msg) => {
+     const li = document.createElement("li");
+
+    // si el mensaje es propio
+    const user = sessionStorage.getItem('usuario');
+    if (msg.user === user) {
+      li.classList.add('mensaje-propio');
+    }
+
+    li.innerHTML = `
+        <span>${msg.user}</span>
+        <p>${msg.message}</p>
+      `;
+    listContainer.appendChild(li);
+
+    });
+
+  });
+
+</script>
+

@@ -1,6 +1,6 @@
 import path from "path";
-import CartManager from "../store/CartManager.js";
-import pathBase from "../utils/pathBase.js";
+import pathBase from "../../../utils/pathBase.js";
+import CartManager from "../managers/CartManager.js";
 
 const filePath = path.join(`${pathBase}/src/store/cart.json`);
 const cart = new CartManager(filePath);

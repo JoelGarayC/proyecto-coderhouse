@@ -1,0 +1,21 @@
+<div class='product-details'>
+  <li>
+    <picture>
+      {{#each data.thumbnails}}
+        <img src={{data.path}} alt={{data.name}} />
+      {{/each}}
+    </picture>
+
+    <div class='list-description'>
+      <h3>{{data.title}}</h3>
+      <p>{{this.description}}</p>
+      <p><strong>Precio:</strong> {{data.price}}</p>
+      <p><strong>Código:</strong> {{data.code}}</p>
+      <p><strong>Stock:</strong> {{data.stock}}</p>
+      <p><strong>Categoría:</strong> {{data.category}}</p>
+    </div>
+    <div class='btn'>
+      <button class='btn-update' data-product-id={{data._id}}>Agregar a Carrito</button>
+    </div>
+  </li>
+</div>

@@ -1,0 +1,81 @@
+<section class="form-section">
+  <h1>Agregar Producto</h1>
+    <form id="add-item-form" enctype="multipart/form-data">
+      <div>
+        <label for="title">Titulo:</label>
+        <input type="text" id="title" name="title" />
+      </div>
+      <div>
+        <label for="description">Descripción:</label>
+        <input type="text" id="description" name="description" />
+      </div>
+      <div>
+        <label for="code">Código:</label>
+        <input type="text" id="code" name="code" />
+      </div>
+      <div>
+        <label for="price">Precio:</label>
+        <input type="number" id="price" name="price" />
+      </div>
+      <div>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" />
+      </div>
+      <div>
+        <label for="category">Categoría:</label>
+        <input type="text" id="category" name="category" />
+      </div>
+      <div>
+        <label for="thumbnails">Subir Imágenes:</label>
+        <input type="file" id="thumbnails" name="thumbnails" multiple />
+      </div>
+      <button type="submit">Agregar Producto:</button>
+    </form>
+    <div id="resultado" class="resultado"></div>
+</section>
+
+<section class="list-section">
+  <h1>Lista de Productos con Socket.io </h1>
+  <ul class="list-container">
+  {{#each products}}
+    <li>
+      <picture>
+        {{#each this.thumbnails}}
+          <img src={{this.path}} alt={{this.name}}>
+        {{/each}}
+      </picture>
+      <div class="list-description">
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p><strong>Precio: $/</strong> {{this.price}}</p>
+        <p><strong>Código:</strong> {{this.code}}</p>
+        <p><strong>Stock:</strong> {{this.stock}}</p>
+        <p><strong>Categoría:</strong> {{this.category}}</p>
+      </div>
+      <div class="btn">
+        <button class="btn-delete" data-product-id={{this.id}}>Eliminar</button>
+      </div>
+    </li>
+  {{/each}}
+</ul>
+
+  <a href="/">Ver Lista con Handlebars</a>
+</section>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h3>Eliminar Producto</h3>
+    </div>
+    <div class="modal-body">
+      <p>¿Estas seguro que desea eliminar el producto?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-delete-confirm">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/public/js/index.js" type="module"></script>

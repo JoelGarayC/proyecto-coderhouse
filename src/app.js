@@ -1,22 +1,31 @@
-import express from "express";
-import routes from "./routes/index.routes.js";
-import pathBase from "./utils/pathBase.js";
+import express from 'express'
+import { app } from './config.js'
+import { connectDB } from './database/connectDB.js'
+import routes from './routes/index.routes.js'
+import viewsRoutes from './routes/views.routes.js'
 
-// app
-const app = express();
-const PORT = 8080;
+class App {
+  constructor() {
+    this.app = express()
+    this.connectDataBase()
+    this.midlewares()
+    this.routes()
+  }
 
-// middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use("/api", routes);
+  connectDataBase() {
+    connectDB()
+  }
 
-app.use("/", (_req, res) => {
-  res.sendFile(pathBase, "/public/index.html");
-});
+  midlewares() {
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(express.static('public'))
+  }
 
-// Listening App Server
-app.listen(PORT, () => {
-  console.log(`Listening in http://localhost:${PORT}`);
-});
+  routes() {
+    this.app.use('/', viewsRoutes)
+    this.app.use(app.pathApi, routes)
+  }
+}
+
+export default App
