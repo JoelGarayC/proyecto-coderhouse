@@ -1,8 +1,11 @@
+import mongoose from 'mongoose'
 import {
   validateIdCart,
   validateIdProduct
 } from '../../../utils/validations.js'
 import { Cart } from '../models/Cart.js'
+import { Product } from '../models/Product.js'
+const { ObjectId } = mongoose.Types
 
 class CartManager {
   async getCarts() {
@@ -118,9 +121,37 @@ class CartManager {
   async updateProducts(idCart, products) {
     try {
       await validateIdCart(idCart)
-      /////////////////////////////////////////////////
 
-      await Cart.updateOne({ _id: idCart }, { $set: { products: [] } })
+      const array = Object.values(products)
+
+      if (array.length === 0) throw new Error(`El body no puede estar vacío`)
+
+      // validacion del arreglo de productos, de acueerdo al formato
+      const isValid = array.every(
+        (obj) =>
+          obj.hasOwnProperty('_id') &&
+          ObjectId.isValid(obj['_id']) &&
+          obj.hasOwnProperty('quantity') &&
+          Number.isInteger(obj['quantity']) &&
+          obj['quantity'] >= 1
+      )
+      if (!isValid)
+        throw new Error(
+          `Escribe un formato (arreglo de productos) válido; ejemplo: [{'_id':'idValidodelProducto','quantity': 2},{'_id': 'idDelProd','quantity': 1}]`
+        )
+
+      // validacion de que todos los productos existen en la bd
+      const productIds = await array.map((obj) => obj['_id'])
+      const areProductsValid = await Product.find({
+        _id: { $in: productIds }
+      })
+      const isValidProducts = areProductsValid.length === array.length
+      if (!isValidProducts)
+        throw new Error(
+          `Uno o más IDs de los productos no existen en la base de datos`
+        )
+
+      await Cart.updateOne({ _id: idCart }, { $set: { products: array } })
       return `Todos los productos actualizados correctamente`
     } catch (err) {
       throw new Error(err.message)

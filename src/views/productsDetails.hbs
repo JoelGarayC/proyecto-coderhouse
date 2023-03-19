@@ -1,4 +1,5 @@
 <div class='product-details'>
+  <h1>Detalles del producto: </h1>
   <li>
     <picture>
       {{#each data.thumbnails}}
@@ -15,7 +16,18 @@
       <p><strong>Categoría:</strong> {{data.category}}</p>
     </div>
     <div class='btn'>
-      <button class='btn-update' data-product-id={{data._id}}>Agregar a Carrito</button>
+      <button
+        class='btn-update'
+        data-product-id={{data._id}}
+        id='btn-add-cart'
+      >Agregar a Carrito</button>
     </div>
   </li>
 </div>
+
+<script>
+  const btn = document.getElementById('btn-add-cart');
+  btn.addEventListener('click', (e) => { const idProd =
+  btn.getAttribute('data-product-id'); console.log(idProd ); alert(`Producto
+  seleccionado con id: ${idProd}`); })
+</script>

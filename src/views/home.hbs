@@ -1,26 +1,7 @@
-<section class="list-section">
-  <h1>Lista de Productos con Handlebars </h1>
-  <ul class="list-container">
-  {{#each items}}
-    <li>
-      <picture>
-        {{#each this.thumbnails}}
-          <img src={{this.path}} alt={{this.name}}>
-        {{/each}}
-      </picture>
-      <div class="list-description">
-        <h3>{{this.title}}</h3>
-        <p>{{this.description}}</p>
-        <p><strong>Precio:</strong> {{this.price}}</p>
-        <p><strong>Código:</strong> {{this.code}}</p>
-        <p><strong>Stock:</strong> {{this.stock}}</p>
-        <p><strong>Categoría:</strong> {{this.category}}</p>
-      </div>
-      <div class="btn">
-        <button class="btn-delete" data-product-id={{this.id}}>Eliminar</button>
-      </div>
-    </li>
-  {{/each}}
-  </ul>
-  <a href="/realtimeproducts">Ver Lista en tiempo real con Socket.io</a>
+<section class='list-section'>
+  <h1>Home</h1>
+  <br />
+  <p>Inicio de la aplicación</p>
+  <br />
+  <a href='/products'>Ver Lista de productos con la base de datos</a>
 </section>

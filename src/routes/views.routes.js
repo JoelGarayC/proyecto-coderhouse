@@ -1,6 +1,7 @@
 import express from 'express'
 import ProductManager from '../dao/fileSystem/managers/ProductManager.js'
 import {
+  getCartById,
   getProducts,
   getProductsById
 } from '../dao/mongoDb/controllers/views.controller.js'
@@ -11,17 +12,15 @@ const product = new ProductManager()
 
 router.get('/', async function (_req, res) {
   try {
-    const products = await product.getProducts()
-    res.render('home', {
-      items: products
-    })
+    res.render('home', {})
   } catch (err) {
     res.json({ error: err.message })
   }
 })
 
 router.get('/products', getProducts)
-router.get('/products/:id', getProductsById)
+router.get('/products/:pid', getProductsById)
+router.get('/carts/:cid', getCartById)
 
 router.get('/realtimeproducts', async function (_req, res) {
   try {

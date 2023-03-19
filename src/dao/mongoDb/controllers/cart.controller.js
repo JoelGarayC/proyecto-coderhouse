@@ -68,9 +68,8 @@ export async function updateProductToCart(req, res) {
 
 export async function updateProductsToCart(req, res) {
   const { cid } = req.params
-
   try {
-    const response = await cart.updateProducts(cid)
+    const response = await cart.updateProducts(cid, req.body)
     res.json({
       ok: true,
       message: response

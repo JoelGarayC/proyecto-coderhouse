@@ -1,5 +1,5 @@
 <section class='list-section'>
-  <h1>Lista de Productos</h1>
+  <h1>Lista de Productos desde la BD</h1>
   <ul class='list-container'>
     {{#if products}}
       {{#each products}}
@@ -28,33 +28,14 @@
   <div class='list-controls'>
     {{#if prevPage}}
       <a
-        href='/products?page={{prevPage}}&limit={{limit}}&sort={{sort}}'
+        href='/products?page={{prevPage}}&limit={{limit}}&sort={{sort}}&query={{query}}'
       >Anterior</a>
     {{/if}}
 
     {{#if nextPage}}
       <a
-        href='/products?page={{nextPage}}&limit={{limit}}&sort={{sort}}'
+        href='/products?page={{nextPage}}&limit={{limit}}&sort={{sort}}&query={{query}}'
       >Siguiente</a>
     {{/if}}
   </div>
 </section>
-
-<div id='myModal' class='modal'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <span class='close'>&times;</span>
-      <h3>Eliminar Producto</h3>
-    </div>
-    <div class='modal-body'>
-      <p>¿Estas seguro que desea agregar el producto al carrito?</p>
-    </div>
-    <div class='modal-footer'>
-      <button class='btn-delete-confirm'>Agregar</button>
-    </div>
-  </div>
-</div>
-
-<script>
-
-</script>
