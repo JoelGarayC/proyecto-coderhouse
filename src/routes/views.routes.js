@@ -1,14 +1,12 @@
 import express from 'express'
-import ProductManager from '../dao/fileSystem/managers/ProductManager.js'
 import {
   getCartById,
   getProducts,
-  getProductsById
+  getProductsById,
+  getProductsRealtime
 } from '../dao/mongoDb/controllers/views.controller.js'
 
 const router = express.Router()
-
-const product = new ProductManager()
 
 router.get('/', async function (_req, res) {
   try {
@@ -21,16 +19,7 @@ router.get('/', async function (_req, res) {
 router.get('/products', getProducts)
 router.get('/products/:pid', getProductsById)
 router.get('/carts/:cid', getCartById)
-
-router.get('/realtimeproducts', async function (_req, res) {
-  try {
-    const products = await product.getProducts()
-    const data = { products }
-    res.render('realTimeProducts', data)
-  } catch (err) {
-    res.json({ error: err.message })
-  }
-})
+router.get('/realtimeproducts', getProductsRealtime)
 
 router.get('/chat', async function (req, res) {
   try {

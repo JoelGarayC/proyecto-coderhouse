@@ -54,17 +54,16 @@ export async function getProductById(req, res) {
 }
 
 export async function addProduct(req, res) {
-  const { title, description, code, stock, price, category } = req.body
+  const { title, description, code, stock, price, category, thumbnails } =
+    req.body
   try {
-    let imagenes = []
-
     const newProduct = {
       title,
       description,
       code,
       stock,
       price,
-      thumbnails: imagenes,
+      thumbnails,
       category
     }
 

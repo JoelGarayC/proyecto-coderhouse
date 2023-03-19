@@ -2,8 +2,8 @@
   <h1>Detalles del producto: </h1>
   <li>
     <picture>
-      {{#each data.thumbnails}}
-        <img src={{data.path}} alt={{data.name}} />
+      {{#each thumbnails}}
+        <img src={{this.path}} alt={{this.name}} />
       {{/each}}
     </picture>
 

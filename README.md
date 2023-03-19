@@ -1,10 +1,9 @@
-# DESAFÍO  Ecommerce
+# PRE-ENTREGA-02 Ecommerce
 
 - Ejecutar el comando "npm install"
 - Ejecutar el "npm run start" o "npm run dev"
 
-- Rutas: 
-![Captura de pantalla](/public/imgs/routes.png)
+- Ruta de Productos http://localhost:8080/products
+- Acepta estos parámetro eje. => ?page=2&limit=10&sort=&query=
 
-- Chat: http://localhost:8080/chat
-![Captura de pantalla](/public/imgs/Captura2.png)
+- Ruta de carrito por ID de ejemplo: http://localhost:8080/carts/640fb0cbac3b3897c24dc63b

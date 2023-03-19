@@ -1,3 +1,4 @@
+import axios from 'axios'
 import 'dotenv/config'
 import displayRoutes from 'express-routemap'
 import fs from 'fs'
@@ -7,6 +8,7 @@ import App from './app.js'
 import { app, createHbs, validateMIME } from './config.js'
 import ProductManager from './dao/fileSystem/managers/ProductManager.js'
 import MessageManager from './dao/mongoDb/managers/MessageManager.js'
+import pathBase from './utils/pathBase.js'
 
 const application = new App()
 const server = http.createServer(application.app)
@@ -25,8 +27,17 @@ validateMIME(application.app)
 io.on('connection', async (socket) => {
   console.log(`Un nuevo cliente se ha conectado con el ID: ${socket.id}`)
 
-  const products = await product.getProducts()
-  io.emit('updateList', products)
+  try {
+    const baseUrl = `http://localhost:${app.port}`
+    const prods = await axios.get(`${baseUrl}${app.pathApi}/products`)
+
+    const products = prods?.data?.payload
+
+    // const products = await product.getProducts()
+    io.emit('updateList', products)
+  } catch (err) {
+    console.log(err.message)
+  }
 
   // Cuando el cliente agrega un elemento a la lista, actualiza la lista y emite el evento a todos los clientes conectados
   socket.on('submit-form', async (data) => {
@@ -63,12 +74,27 @@ io.on('connection', async (socket) => {
         thumbnails: images,
         category
       }
-      const response = await product.addProduct(newProduct)
-      socket.emit('form-response', { ok: true, message: response })
+
+      //agregando el producto a la bd
+      // const response = await product.addProduct(newProduct)
+      const baseUrl = `http://localhost:${app.port}`
+      const response = await axios.post(
+        `${baseUrl}${app.pathApi}/products`,
+        newProduct
+      )
+
+      socket.emit('form-response', {
+        ok: true,
+        message: response?.data?.message
+      })
 
       // emite al cliente la actualización de los productos
-      if (response.ok) {
-        const products = await product.getProducts()
+      if (response.status === 200) {
+        // const products = await product.getProducts()
+        const baseUrl = `http://localhost:${app.port}`
+        const prods = await axios.get(`${baseUrl}${app.pathApi}/products`)
+
+        const products = prods?.data?.payload
         io.emit('updateList', products)
       }
     } catch (err) {
@@ -83,7 +109,7 @@ io.on('connection', async (socket) => {
       const res = await product.deleteProduct(id)
       socket.emit('deleteProd-response', { ok: true, message: res })
     } catch (error) {
-      socket.emit('deleteProd-response', { ok: false, message: err })
+      socket.emit('deleteProd-response', { ok: false, message: err.message })
     }
   })
 

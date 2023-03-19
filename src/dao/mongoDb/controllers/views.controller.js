@@ -27,8 +27,10 @@ export async function getProductsById(req, res) {
     )
 
     const data = productDetails?.data?.product
-    res.render('productsDetails', { data })
-  } catch (error) {
+    const thumbnails = productDetails?.data?.product?.thumbnails
+
+    res.render('productsDetails', { data, thumbnails })
+  } catch (err) {
     res.json({ error: err.message })
   }
 }
@@ -40,8 +42,23 @@ export async function getCartById(req, res) {
       `${baseUrl}${app.pathApi}/carts/${req.params.cid}`
     )
     const data = cartDetails?.data?.cart?.products
+    // const thumbnails = cartDetails?.data?.cart?.products?.thumbnails
+
     res.render('cartDetails', { data })
-  } catch (error) {
+  } catch (err) {
+    res.json({ error: err.message })
+  }
+}
+
+export async function getProductsRealtime(req, res) {
+  try {
+    const baseUrl = `${req.protocol}://${req.hostname}:${req.socket.localPort}`
+    const prods = await axios.get(`${baseUrl}${app.pathApi}/products`)
+
+    const data = prods?.data?.payload
+
+    res.render('realTimeProducts', data)
+  } catch (err) {
     res.json({ error: err.message })
   }
 }

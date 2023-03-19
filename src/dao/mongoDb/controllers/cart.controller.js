@@ -6,7 +6,7 @@ export async function getCarts(req, res) {
   try {
     const response = await cart.getCarts()
     res.json({
-      ok: true,
+      status: 'success',
       carts: response
     })
   } catch (err) {
@@ -19,7 +19,7 @@ export async function getCartById(req, res) {
   try {
     const response = await cart.getCartById(cid)
     res.json({
-      ok: true,
+      status: 'success',
       cart: response
     })
   } catch (err) {
@@ -31,7 +31,7 @@ export async function addCart(req, res) {
   try {
     const response = await cart.addCart()
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
@@ -44,7 +44,7 @@ export async function addProductToCart(req, res) {
   try {
     const response = await cart.addProduct(cid, pid)
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
@@ -58,7 +58,7 @@ export async function updateProductToCart(req, res) {
   try {
     const response = await cart.updateProduct(cid, pid, quantity)
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
@@ -71,7 +71,7 @@ export async function updateProductsToCart(req, res) {
   try {
     const response = await cart.updateProducts(cid, req.body)
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
@@ -84,7 +84,7 @@ export async function deleteProductToCart(req, res) {
   try {
     const response = await cart.deleteProduct(cid, pid)
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
@@ -97,7 +97,7 @@ export async function deleteProductsToCart(req, res) {
   try {
     const response = await cart.deleteProducts(cid)
     res.json({
-      ok: true,
+      status: 'success',
       message: response
     })
   } catch (err) {
