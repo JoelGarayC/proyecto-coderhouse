@@ -13,7 +13,28 @@ export async function getProducts(req, res) {
     const prevPage = prods?.data?.prevPage
     const nextPage = prods?.data?.nextPage
 
-    res.render('products', { products, prevPage, nextPage, limit, sort, query })
+    if (req.session?.user) {
+      const user = req.session.user
+
+      res.render('products', {
+        products,
+        prevPage,
+        nextPage,
+        limit,
+        sort,
+        query,
+        user
+      })
+    } else {
+      res.render('products', {
+        products,
+        prevPage,
+        nextPage,
+        limit,
+        sort,
+        query
+      })
+    }
   } catch (err) {
     res.json({ error: err.message })
   }
@@ -61,4 +82,19 @@ export async function getProductsRealtime(req, res) {
   } catch (err) {
     res.json({ error: err.message })
   }
+}
+
+export async function login(req, res) {
+  res.render('login')
+}
+
+export async function register(req, res) {
+  res.render('register')
+}
+export async function profile(req, res) {
+  const user = req.session.user
+
+  res.render('profile', {
+    user
+  })
 }

@@ -1,3 +1,20 @@
+{{#if user}}
+
+  <div>
+    <h1>Perfil del usuario</h1>
+    <p>BIENVENIDO: {{user.first_name}}</p>
+    <p>Correo: {{user.email}}</p>
+    <p>Rol: {{user.role}}</p>
+
+    <form action='/api/v1/sessions/logout' method='get'>
+      <button type='submit'>Cerrar sesión</button>
+    </form>
+  </div>
+  <div>
+    <a href='/profile'>Ir a Perfil</a>
+  </div>
+{{/if}}
+
 <section class='list-section'>
   <h1>Lista de Productos desde la BD</h1>
   <ul class='list-container'>
