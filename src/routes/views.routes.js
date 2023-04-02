@@ -34,6 +34,20 @@ router.get('/login', login)
 router.get('/register', register)
 router.get('/profile', profile)
 
+router.get('/failregister', async (req, res) => {
+  console.log('failed to strategy')
+  res.send({
+    error: 'failed to register'
+  })
+})
+
+router.get('/faillogin', async (req, res) => {
+  console.log('failed to strategy')
+  console.log(req.user)
+  res.send({
+    error: 'failed to login'
+  })
+})
 router.get('/products', getProducts)
 router.get('/products/:pid', getProductsById)
 

@@ -14,15 +14,31 @@ router.post(
   passport.authenticate('register', { failureRedirect: '/failregister' }),
   register
 )
-router.post('/login', login)
+router.post(
+  '/login',
+  passport.authenticate('login', { failureRedirect: '/faillogin' }),
+  login
+)
 router.get('/profile', profile)
 router.get('/logout', logout)
 
-router.get('/failregister', async (req, res) => {
-  console.log('failed to strategy')
-  res.send({
-    error: 'failed to register'
-  })
-})
+router.get(
+  '/github',
+  passport.authenticate('github', { scope: ['user:email'] }),
+  async (req, res) => {}
+)
+
+router.get(
+  '/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  async (req, res) => {
+    try {
+      req.session.user = req.user
+      res.redirect('/profile')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
 
 export default router
