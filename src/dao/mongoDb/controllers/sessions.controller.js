@@ -14,24 +14,24 @@ export async function login(req, res) {
       res.redirect('/products')
       return
     }
-    const userInDb = await User.findOne({ email })
+    const findUser = await User.findOne({ email })
 
-    if (!userInDb)
+    if (!findUser)
       return res
         .status(400)
         .json({ msg: 'El correo no existe, por favor registrate' })
 
     // comparar password con el password encriptado de la base de datos
-    const isMatch = await userInDb.comparePassword(password)
+    const isMatch = await findUser.comparePassword(password)
     if (!isMatch)
-      return res.status(400).json({ msg: 'Su contraseña es incorrecta' })
+      return res.status(401).json({ msg: 'Su contraseña es incorrecta' })
 
     req.session.user = {
-      first_name: userInDb.first_name,
-      last_name: userInDb.last_name,
-      email: userInDb.email,
-      age: userInDb.age,
-      role: userInDb.role
+      first_name: findUser.first_name,
+      last_name: findUser.last_name,
+      email: findUser.email,
+      age: findUser.age,
+      role: findUser.role
     }
 
     res.redirect('/products')
@@ -58,7 +58,7 @@ export async function register(req, res) {
 
     newUser.save()
 
-    // req.session.user = { first_name, last_name, email, age, role: 'user' }
+    req.session.user = { first_name, last_name, email, age, role: 'user' }
     res.json(`Registro exitoso`)
   } catch (error) {
     console.log(error.message)
@@ -84,3 +84,5 @@ export async function logout(req, res) {
 }
 
 export async function profile(req, res) {}
+
+export async function update(req, res) {}
