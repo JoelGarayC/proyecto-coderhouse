@@ -3,7 +3,9 @@ import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import session from 'express-session'
+import passport from 'passport'
 import { app } from './config.js'
+import initializePassport from './config/passport.config.js'
 import { connectDB } from './database/connectDB.js'
 import routes from './routes/index.routes.js'
 import viewsRoutes from './routes/views.routes.js'
@@ -33,6 +35,9 @@ class App {
         saveUninitialized: true
       })
     )
+    initializePassport()
+    this.app.use(passport.initialize())
+    this.app.use(passport.session())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(bodyparser.urlencoded({ extended: true }))

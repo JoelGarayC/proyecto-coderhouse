@@ -1,6 +1,6 @@
 import passport from 'passport'
 import local from 'passport-local'
-import { User } from '../dao/mongoDb/models/User'
+import { User } from '../dao/mongoDb/models/User.js'
 
 const LocalStrategy = local.Strategy
 
@@ -33,7 +33,7 @@ const initializePassport = () => {
 
           return done(null, result)
         } catch (error) {
-          console.log(error)
+          return done('Error al obtener el usuario: ' + error)
         }
       }
     )
