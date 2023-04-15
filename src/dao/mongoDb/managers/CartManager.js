@@ -34,8 +34,8 @@ class CartManager {
       const newCart = new Cart({
         products: []
       })
-      await newCart.save()
-      return `Carrito agregado con éxito: []`
+      const res = await newCart.save()
+      return { message: `Carrito agregado con éxito: []`, id: res._id }
     } catch (err) {
       throw new Error(err.message)
     }

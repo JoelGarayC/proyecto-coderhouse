@@ -29,10 +29,10 @@ export async function getCartById(req, res) {
 
 export async function addCart(req, res) {
   try {
-    const response = await cart.addCart()
+    const { message } = await cart.addCart()
     res.json({
       status: 'success',
-      message: response
+      message
     })
   } catch (err) {
     res.json({ status: 'error', message: err.message })

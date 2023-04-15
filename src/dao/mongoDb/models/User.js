@@ -1,5 +1,5 @@
 import bycryptjs from 'bcryptjs'
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
 
 export const UserSchema = new Schema({
   first_name: String,
@@ -11,9 +11,18 @@ export const UserSchema = new Schema({
     lowercase: true, // convertir a minusculas el email
     index: true
   },
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cart',
+    unique: true,
+    sparse: true
+  },
   age: Number,
   password: String,
-  role: String
+  role: {
+    type: String,
+    default: 'user'
+  }
 })
 
 // encriptar password antes de guardar el usuario en la base de datos

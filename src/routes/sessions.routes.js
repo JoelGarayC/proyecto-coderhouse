@@ -6,6 +6,8 @@ import {
   profile,
   register
 } from '../dao/mongoDb/controllers/sessions.controller.js'
+import { authorization } from '../middlewares/authorization.js'
+import { checkCart } from '../middlewares/checkCart.js'
 
 const router = express.Router()
 
@@ -17,6 +19,7 @@ router.post(
 router.post(
   '/login',
   passport.authenticate('login', { failureRedirect: '/faillogin' }),
+  checkCart,
   login
 )
 router.get('/profile', profile)
@@ -31,6 +34,7 @@ router.get(
 router.get(
   '/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
+  checkCart,
   async (req, res) => {
     try {
       req.session.user = req.user
@@ -40,5 +44,9 @@ router.get(
     }
   }
 )
+
+router.get('/current', authorization('user'), async (req, res) => {
+  res.send(req.user)
+})
 
 export default router

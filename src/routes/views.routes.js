@@ -37,15 +37,15 @@ router.get('/profile', profile)
 router.get('/failregister', async (req, res) => {
   console.log('failed to strategy')
   res.send({
-    error: 'failed to register'
+    error: 'Error al registrarse'
   })
 })
 
 router.get('/faillogin', async (req, res) => {
   console.log('failed to strategy')
-  console.log(req.user)
+  console.log(req.session.errorMessage)
   res.send({
-    error: 'failed to login'
+    error: 'Error al iniciar sesión'
   })
 })
 router.get('/products', getProducts)
